@@ -1,7 +1,9 @@
-# seo-dojo
-Simple DOJO exercise in Scala
-
-Get a content of a especific webpage and normalize characters 
+# FitGenerator
+Turn HTML fit files in cpp code
 
 **To Run**
-```$> sbt run```
+```shell
+$> sbt assembly
+$> java -jar fitGenerator.jar htmlFile.html
+```
+
