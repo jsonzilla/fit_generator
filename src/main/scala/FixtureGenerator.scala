@@ -66,9 +66,9 @@ class FixtureGenerator(t: SimpleTable) {
 
     def methodRes(a: Arg): String =
       if (a.argType.customized.nonEmpty)
-        s"${a.argType.customized} ceefit_call_spec $className::${a.varName}();\n{\nreturn 0.0;\n}\n"
+        s"${a.argType.customized} ceefit_call_spec $className::${a.varName}()\n{\nreturn 0.0;\n}\n"
       else
-        s"${a.argType.typeName} ceefit_call_spec $className::${a.varName}();\n{\n  return ${a.argType.default};\n}\n"
+        s"${a.argType.typeName} ceefit_call_spec $className::${a.varName}()\n{\n  return ${a.argType.default};\n}\n"
 
     val source = s"""#include "$fileNameHeader"
                    |$separator
