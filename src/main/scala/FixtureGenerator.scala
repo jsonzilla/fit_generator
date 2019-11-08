@@ -12,7 +12,7 @@ class FixtureGenerator(t: SimpleTable) {
   lazy private val args = table.args.map(e => Arg(e._1, fix(e._1), getClass(e._2)))
   lazy private val argsPart = args.partition(_.originalName.contains("()"))
 
-  lazy private val className = s"Fit$title"
+  lazy private val className = s"FitCheck$title"
 
   val fileNameHeader = s"$className.h"
   val fileNameSource = s"$className.cpp"
@@ -47,7 +47,6 @@ class FixtureGenerator(t: SimpleTable) {
       |#include "ceefit.h"
       |$customHeader
       |
-      |#include "$fileNameHeader"
       |$separator
       |class $className: public CEEFIT::COLUMNFIXTURE
       |{
