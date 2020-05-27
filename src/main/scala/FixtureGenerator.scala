@@ -74,7 +74,14 @@ class FixtureGenerator(t: SimpleTable) {
                    |$className::$className()
                    |{
                    |""".stripMargin
-    source + argsPart._2.map(registerArg).mkString("") + "\n" + argsPart._1.map(registerRes).mkString("") + "\n}\n" +
-      argsPart._1.map(separator + "\n" + methodRes(_)).mkString("") + separator
+    source + argsPart._2
+      .map(registerArg)
+      .mkString("") + "\n" + argsPart._1
+               .map(registerRes)
+               .map(x => x + "\n")
+               .mkString("") + "}\n" +
+                argsPart._1
+                  .map(separator + "\n" + methodRes(_))
+                  .mkString("") + separator
   }
 }

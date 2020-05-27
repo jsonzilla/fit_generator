@@ -9,7 +9,7 @@ object TableParser {
     val rows = e >> elementList("tr")
     rows match {
       case r if r.size > 2 =>
-        val title = (r.head >> elementList("td") >> text).mkString("").trim()
+        val title = (r.head >> elementList("td") >> text).mkString("").trim().split("\\.").last
         val eHeader = r(1) >> elementList("td") >> text
         val eValueLine = r(2) >> elementList("td") >> text
 
