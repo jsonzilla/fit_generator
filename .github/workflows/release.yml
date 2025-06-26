@@ -33,28 +33,29 @@ jobs:
       - name: Build with sbt
         run: sbt package
 
-      - name: Upload JAR Artifact
+      - name: Upload ZIP Artifact
         uses: actions/upload-artifact@v4
         with:
           name: fit_generator
-          path: target/scala-*/**/*.jar
+          path: target/scala-*/**/*.zip
 
   release:
     needs: build
     runs-on: ubuntu-latest
     steps:
 
-      - name: Download JAR Artifact
+      - name: Download ZIP Artifact
         uses: actions/download-artifact@v4
         with:
           name: fit_generator
 
-      - name: Move JARs to workspace root
-        run: mv fit_generator/*.jar .
+
+      - name: Move ZIPs to workspace root
+        run: mv fit_generator/*.zip . || true
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: "*.jar"
+          files: "*.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
