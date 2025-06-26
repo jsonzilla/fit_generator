@@ -23,7 +23,8 @@ jobs:
         run: |
           echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
           echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-          curl -sL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99E82A75642AC823 | sudo apt-key add
+          curl -fsSL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99E82A75642AC823 | gpg --dearmor | sudo tee /usr/share/keyrings/sbt-archive-keyring.gpg > /dev/null
+          echo "deb [signed-by=/usr/share/keyrings/sbt-archive-keyring.gpg] https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
           sudo apt-get update
           sudo apt-get install sbt -y
 
@@ -50,4 +51,4 @@ jobs:
         with:
           files: "*.jar"
         env:
-          GITHUB_TOKEN: ${{ secrets.SAVE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
