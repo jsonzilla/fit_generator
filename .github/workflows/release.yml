@@ -36,17 +36,21 @@ jobs:
       - name: Upload JAR Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: my-app-jar
+          name: fit_generator
           path: target/scala-*/**/*.jar
 
   release:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
       - name: Download JAR Artifact
         uses: actions/download-artifact@v4
         with:
-          name: my-app-jar
+          name: fit_generator
+
+      - name: Move JARs to workspace root
+        run: mv fit_generator/*.jar .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
